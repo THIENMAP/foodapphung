@@ -48,6 +48,7 @@ public class ActivityDangNhap extends AppCompatActivity {
         buttondn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //hhgu
                 String txtemail = emaildn.getText().toString().trim();
                 String txtpass = passdn.getText().toString().trim();
                 if(TextUtils.isEmpty(txtemail)){
