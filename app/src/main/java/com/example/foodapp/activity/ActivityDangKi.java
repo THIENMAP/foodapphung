@@ -70,6 +70,7 @@ public class ActivityDangKi extends AppCompatActivity {
         }else{
             if(txtpass.equals(txtrepass)){
                 //post data
+                //teest
                 compositeDisposable.add(apiBanHang.dangki(txtusername,txtemail,txtpass,txtmobile)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
