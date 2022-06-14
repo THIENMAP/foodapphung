@@ -1,6 +1,7 @@
 package com.example.foodapp.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -35,6 +36,8 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class ActivityGiohang extends AppCompatActivity {
+    int tongtt;
+    AppCompatButton buttontt;
     ImageView addicon,removeicon;
     TextView giohangtrong,tonggiohang;
     Toolbar toolbar;
@@ -63,6 +66,7 @@ public class ActivityGiohang extends AppCompatActivity {
             tong = tong + Integer.parseInt(Long.toString(giohangList.get(i).getGia())) *
                     Integer.parseInt(giohangList.get(i).getSoluong());
         }
+        tongtt = tong;
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
         tonggiohang.setText(decimalFormat.format(Double.parseDouble(Integer.toString(tong)))+"đ");
     }
@@ -129,6 +133,14 @@ public class ActivityGiohang extends AppCompatActivity {
         recyclerViewgiohang.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerViewgiohang.setLayoutManager(layoutManager);
+        buttontt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(),ThanhToanActivity.class);
+                intent.putExtra("tongtt",tongtt);
+                startActivity(intent);
+            }
+        });
 
 
     }
@@ -140,6 +152,7 @@ public class ActivityGiohang extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbargiohang);
 
         tonggiohang = findViewById(R.id.txttonggiohang);
+        buttontt = findViewById(R.id.btntt_gh);
 
         recyclerViewgiohang = findViewById(R.id.recyclerviewgiohang);
 

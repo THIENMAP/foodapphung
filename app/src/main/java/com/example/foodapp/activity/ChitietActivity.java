@@ -79,7 +79,7 @@ public class ChitietActivity extends AppCompatActivity {
                              giohangModel-> {
                                 if(giohangModel.isSuccess()){
 
-                                    Toast.makeText(getApplicationContext(),"Thành công",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(),"Đã thêm vào giỏ hàng",Toast.LENGTH_SHORT).show();
 
 
                                 }else {

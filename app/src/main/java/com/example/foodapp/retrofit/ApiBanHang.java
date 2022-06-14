@@ -1,6 +1,7 @@
 package com.example.foodapp.retrofit;
 
 import com.example.foodapp.model.GiohangModel;
+import com.example.foodapp.model.HoadonModel;
 import com.example.foodapp.model.LoaispModel;
 import com.example.foodapp.model.Sanpham;
 import com.example.foodapp.model.SanphamModel;
@@ -32,6 +33,15 @@ public interface ApiBanHang {
             @Field("email") String email,
             @Field("pass") String pass,
             @Field("mobile") String mobile
+    );
+    @POST("android_hoadon.php")
+    @FormUrlEncoded
+    Observable<HoadonModel> hoadon(
+            @Field("iduser") int iduser,
+            @Field("email") String email,
+            @Field("tongtien") int tongtien,
+            @Field("mobile") String mobile,
+            @Field("diachi") String diachi
     );
     @POST("androi_addgiohang.php")
     @FormUrlEncoded
