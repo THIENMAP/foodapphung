@@ -75,7 +75,7 @@ public class GiohangAdapter extends RecyclerView.Adapter<GiohangAdapter.MyViewHo
                         //tinh lai tong tien
                         EventBus.getDefault().postSticky(new TinhTongEvent());
                     }else{
-                        EventBus.getDefault().post(new DeleteEvent(pos));
+                        //EventBus.getDefault().post(new DeleteEvent(pos));
                         EventBus.getDefault().postSticky(new TinhTongEvent());
                     }
 
@@ -98,6 +98,7 @@ public class GiohangAdapter extends RecyclerView.Adapter<GiohangAdapter.MyViewHo
 
                     //tinh lai tong tien
                     EventBus.getDefault().post(new DeleteEvent(pos));
+                    EventBus.getDefault().postSticky(new TinhTongEvent());
 
 
                 }
@@ -126,7 +127,7 @@ public class GiohangAdapter extends RecyclerView.Adapter<GiohangAdapter.MyViewHo
 
             removesl = itemView.findViewById(R.id.removesl);
             addsl = itemView.findViewById(R.id.addsl);
-            deletesp11 = itemView.findViewById(R.id.xoagh1);
+            deletesp11 = itemView.findViewById(R.id.xoagh);
             tensp = itemView.findViewById(R.id.tenspgiohang);
             giasp = itemView.findViewById(R.id.giaspgiohang);
             soluongsp = itemView.findViewById(R.id.slspgiohang);
@@ -135,6 +136,7 @@ public class GiohangAdapter extends RecyclerView.Adapter<GiohangAdapter.MyViewHo
             //event click
             addsl.setOnClickListener(this);
             removesl.setOnClickListener(this);
+            deletesp11.setOnClickListener(this);
         }
 
         public void setImageClickListenner(ImageClickListenner imageClickListenner) {
