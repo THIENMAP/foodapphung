@@ -16,8 +16,12 @@ import com.example.foodapp.Interface.ImageClickListenner;
 import com.example.foodapp.R;
 
 import com.example.foodapp.activity.ActivityGiohang;
+import com.example.foodapp.model.EventBus.DeleteEvent;
+import com.example.foodapp.model.EventBus.TinhTongEvent;
 import com.example.foodapp.model.Giohang;
 import com.example.foodapp.model.Sanpham;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.text.DecimalFormat;
 import java.util.List;
@@ -61,18 +65,43 @@ public class GiohangAdapter extends RecyclerView.Adapter<GiohangAdapter.MyViewHo
                     if(Integer.parseInt(giohangList.get(pos).getSoluong()) >1){
                         int slmoi = Integer.parseInt(giohangList.get(pos).getSoluong())-1;
                         giohangList.get(pos).setSoluong(Integer.toString(slmoi));
+                        //cap nhat
+                        holder.soluongsp.setText(giohangList.get(pos).getSoluong());
+                        int sl = Integer.parseInt(giohangList.get(pos).getSoluong());
+                        int gia = Integer.parseInt(Long.toString(giohangList.get(pos).getGia()));
+                        int tamtinh = sl*gia;
+                        //DecimalFormat decimalFormat1 = new DecimalFormat("###,###,###");
+                        holder.giatt.setText(decimalFormat.format(Double.parseDouble(Integer.toString(tamtinh)))+"đ");
+                        //tinh lai tong tien
+                        EventBus.getDefault().postSticky(new TinhTongEvent());
+                    }else{
+                        EventBus.getDefault().post(new DeleteEvent(pos));
+                        EventBus.getDefault().postSticky(new TinhTongEvent());
                     }
+
                 }else if(giatri==2){
                     int slmoi = Integer.parseInt(giohangList.get(pos).getSoluong())+1;
                     giohangList.get(pos).setSoluong(Integer.toString(slmoi));
+                    //cap nhat
+                    holder.soluongsp.setText(giohangList.get(pos).getSoluong());
+                    int sl = Integer.parseInt(giohangList.get(pos).getSoluong());
+                    int gia = Integer.parseInt(Long.toString(giohangList.get(pos).getGia()));
+                    int tamtinh = sl*gia;
+                    //DecimalFormat decimalFormat1 = new DecimalFormat("###,###,###");
+                    holder.giatt.setText(decimalFormat.format(Double.parseDouble(Integer.toString(tamtinh)))+"đ");
+                    //tinh lai tong tien
+                    EventBus.getDefault().postSticky(new TinhTongEvent());
+
+                }else if(giatri==0){
+                    //deletesp(giohangList.get(pos).getIdgiohang());
+                    //giohangList.remove(pos);
+
+                    //tinh lai tong tien
+                    EventBus.getDefault().post(new DeleteEvent(pos));
+
+
                 }
-                holder.soluongsp.setText(giohangList.get(pos).getSoluong());
-                int sl = Integer.parseInt(giohangList.get(pos).getSoluong());
-                int gia = Integer.parseInt(Long.toString(giohangList.get(pos).getGia()));
-                int tamtinh = sl*gia;
-                //DecimalFormat decimalFormat1 = new DecimalFormat("###,###,###");
-                holder.giatt.setText(decimalFormat.format(Double.parseDouble(Integer.toString(tamtinh)))+"đ");
-                //tinh lai tong tien
+
 
             }
         });
@@ -84,14 +113,20 @@ public class GiohangAdapter extends RecyclerView.Adapter<GiohangAdapter.MyViewHo
         return giohangList.size();
     }
 
+    private void deletesp(int idgiohang){
+
+    }
+
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView tensp,giasp,soluongsp,giatt;
-        ImageView anhsanpham,addsl,removesl;
+        ImageView anhsanpham,addsl,removesl,deletesp11;
         ImageClickListenner imageClickListenner;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
+
             removesl = itemView.findViewById(R.id.removesl);
             addsl = itemView.findViewById(R.id.addsl);
+            deletesp11 = itemView.findViewById(R.id.xoagh1);
             tensp = itemView.findViewById(R.id.tenspgiohang);
             giasp = itemView.findViewById(R.id.giaspgiohang);
             soluongsp = itemView.findViewById(R.id.slspgiohang);
@@ -112,6 +147,8 @@ public class GiohangAdapter extends RecyclerView.Adapter<GiohangAdapter.MyViewHo
                 imageClickListenner.onImageClick(view,getAdapterPosition(),1);
             }else if(view==addsl){
                 imageClickListenner.onImageClick(view,getAdapterPosition(),2);
+            }else if(view==deletesp11){
+                imageClickListenner.onImageClick(view,getAdapterPosition(),0);
             }
         }
     }

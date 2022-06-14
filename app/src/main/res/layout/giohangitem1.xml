@@ -17,8 +17,8 @@
         <ImageView
             android:id="@+id/item_giohang"
             android:scaleType="centerCrop"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
 
             app:srcCompat="@drawable/ic_media_24" />
         <LinearLayout
@@ -86,9 +86,9 @@
 
                     app:srcCompat="@drawable/ic_baseline_add_24" />
                 <ImageView
-                    android:layout_marginLeft="10dp"
+
                     android:layout_marginTop="10dp"
-                    android:id="@+id/xoa"
+                    android:id="@+id/xoagh1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
