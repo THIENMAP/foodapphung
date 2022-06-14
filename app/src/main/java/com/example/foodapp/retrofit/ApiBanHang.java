@@ -43,6 +43,11 @@ public interface ApiBanHang {
             @Field("gia") String gia,
             @Field("urlanh") String urlanh
     );
+    @POST("androi_xoagh.php")
+    @FormUrlEncoded
+    Observable<GiohangModel> xoagiohang(
+            @Field("idgiohang") int idgiohang
+    );
     @POST("androi_getgiohang.php")
     @FormUrlEncoded
     Observable<GiohangModel> getgiohang(

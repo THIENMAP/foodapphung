@@ -61,12 +61,12 @@
             android:id="@+id/txttonggiohang"
             android:textSize="17dp"
             android:textColor="#FF0000"
-            android:text="40.000 đ"
+            android:text="0 đ"
             android:layout_marginRight="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnthanhtoan"
+            android:id="@+id/btntt_gh"
             android:layout_marginRight="10dp"
 
             android:backgroundTint="@color/purple_700"

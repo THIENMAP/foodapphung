@@ -67,7 +67,26 @@ public class ActivityGiohang extends AppCompatActivity {
         tonggiohang.setText(decimalFormat.format(Double.parseDouble(Integer.toString(tong)))+"đ");
     }
     private void deletesp(int pos) {
+        compositeDisposable.add(apiBanHang.xoagiohang(giohangList.get(pos).getIdgiohang())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        userModel -> {
+                            if(userModel.isSuccess()){
+
+
+                                Toast.makeText(this, "Đã xóa khỏi giỏ", Toast.LENGTH_SHORT).show();
+
+                            }else {
+                                Toast.makeText(getApplicationContext(),userModel.getMessage(),Toast.LENGTH_LONG).show();
+                            }
+                        },
+                        throwable -> {
+                            Toast.makeText(getApplicationContext(),throwable.getMessage(),Toast.LENGTH_LONG).show();
+                        }
+                ));
         giohangList.remove(pos);
+
         giohangAdapter.notifyDataSetChanged();
     }
 
@@ -121,6 +140,7 @@ public class ActivityGiohang extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbargiohang);
 
         tonggiohang = findViewById(R.id.txttonggiohang);
+
         recyclerViewgiohang = findViewById(R.id.recyclerviewgiohang);
 
 
@@ -140,13 +160,13 @@ public class ActivityGiohang extends AppCompatActivity {
     @Subscribe(sticky = true,threadMode = ThreadMode.MAIN)
     public void eventTinhTong(TinhTongEvent event){
         if(event != null){
-            Toast.makeText(this, "tong tien" , Toast.LENGTH_SHORT).show();
+
             tongtien();
         }
     }
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void eventDelete(DeleteEvent event1){
-        Toast.makeText(this, "Hey, my message" + event1.getPos(), Toast.LENGTH_SHORT).show();
+
             deletesp(event1.getPos());
 
     }
